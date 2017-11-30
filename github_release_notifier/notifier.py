@@ -7,7 +7,7 @@ from github_release_notifier.parser import parse
 from distutils.version import StrictVersion
 from pathlib import Path
 
-__DEFAULT_FILE__ = '~/.github_release_notifier/versions'
+__DEFAULT_FILE__ = '/root/.github_release_notifier/versions'
 
 
 def run(file=__DEFAULT_FILE__):
@@ -23,7 +23,11 @@ def run(file=__DEFAULT_FILE__):
                 updated[package] = entry['version']
                 for webhook in get(package):
                     logger.info("Hook call : %s / %s" % (webhook, json.dumps(entry)))
-                    requests.post(webhook, dict(Body=json.dumps(entry)))
+                    try:
+                        requests.post(webhook, dict(Body=json.dumps(entry)))
+                    except:
+                        logger.error("Error occured : %s" % (sys.exc_info()[0]))
+                        pass
     return updated
 
 

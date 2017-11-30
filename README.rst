@@ -85,6 +85,25 @@ This will check every day at midnight if new versions have been released.
 Docker Usage
 ------------
 
+First run the daemon
+
+.. code::
+
+    docker run --name GRN -d femtopixel/github-release-notifier
+
+you can mount a volume to `/root/.github_release_notifier/` to keep tracks of webhooks and versions
+
+example:
+
+.. code::
+
+    docker run --name GRN -d -v /path/to/your/saves:/root/.github_release_notifier/ femtopixel/github-release-notifier
+
+Then register your webhook :
+
+.. code::
+
+    docker exec GRN -a subscribe -p jaymoulin/google-music-manager -w https://acme.com/updated
 
 
 Submitting bugs and feature requests

@@ -24,9 +24,11 @@ setup(
         "Natural Language :: English",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
-        "Topic :: Communications :: File Sharing",
-        "Topic :: Home Automation",
+        "Topic :: Communications",
         "Topic :: Internet",
+        "Topic :: Software Development :: Pre-processors",
+        "Intended Audience :: Developers",
+        "Topic :: Software Development :: Build Tools",
     ],
     entry_points={
         'console_scripts': [

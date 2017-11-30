@@ -8,7 +8,7 @@ from hashlib import sha224
 
 __all__ = ['subscribe', 'unsubscribe', 'get', 'get_list']
 __SALT__ = 'saltedUnique'
-__DEFAULT_FILE__ = '~/.github_release_notifier/hooks'
+__DEFAULT_FILE__ = '/root/.github_release_notifier/hooks'
 
 
 def _get_database(file=__DEFAULT_FILE__):

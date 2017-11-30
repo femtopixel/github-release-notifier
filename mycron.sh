@@ -4,5 +4,5 @@ set -e
 
 while [ true ]; do
     github-release-notifier
-    sleep 1m
+    sleep 24h
 done
