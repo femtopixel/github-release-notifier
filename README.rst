@@ -2,9 +2,9 @@
 Github Release Notifier
 =======================
 
-.. image:: https://img.shields.io/github/release/femtopixel/github-notifier.svg
+.. image:: https://img.shields.io/github/release/femtopixel/github-release-notifier.svg
     :alt: latest release
-    :target: http://github.com/femtopixel/github-notifier/releases
+    :target: http://github.com/femtopixel/github-release-notifier/releases
 .. image:: https://img.shields.io/pypi/v/github-release-notifier.svg
     :alt: PyPI version
     :target: https://pypi.org/project/github-release-notifier/
