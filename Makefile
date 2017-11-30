@@ -1,14 +1,13 @@
-.PHONY: install clean check
+VERSION ?= 0.1.0
+FULLVERSION ?= ${VERSION}
+archs = s390x arm32v7 amd64 i386 arm64v8 arm32v6
 
-test:
-	make install
+.PHONY: docker build-docker publish-docker latest
+test: install
 	twine upload -r testpypi dist/*
-publish:
-	make install
+publish: install
 	twine upload dist/*
-install:
-	make clean
-	make check
+install: clean check
 	sudo python3 setup.py sdist
 check:
 	python3 setup.py check --restructuredtext
@@ -19,3 +18,18 @@ dist:
 clean: build dist
 	sudo rm -Rf build/*
 	sudo rm -Rf dist/*
+docker: build-docker publish-docker latest
+build-docker:
+	cp /usr/bin/qemu-*-static .
+	$(foreach arch,$(archs), \
+		cat Dockerfile | sed "s/FROM python:alpine/FROM ${arch}\/python:alpine/g" > .Dockerfile; \
+		docker build -t femtopixel/github-release-notifier:${VERSION}-$(arch) -f .Dockerfile .;\
+	)
+publish-docker:
+	docker push femtopixel/github-release-notifier
+	cat manifest.yml | sed "s/\$$VERSION/${VERSION}/g" > manifest.yaml
+	cat manifest.yaml | sed "s/\$$FULLVERSION/${FULLVERSION}/g" > manifest2.yaml
+	mv manifest2.yaml manifest.yaml
+	manifest-tool push from-spec manifest.yaml
+latest: build
+	FULLVERSION=latest VERSION=${VERSION} make publish

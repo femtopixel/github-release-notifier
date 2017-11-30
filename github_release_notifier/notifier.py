@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import sys, json, os, requests, logging
-from webhook import get, get_list
-from parser import parse
+from github_release_notifier.webhook import get, get_list
+from github_release_notifier.parser import parse
 from distutils.version import StrictVersion
 from pathlib import Path
 

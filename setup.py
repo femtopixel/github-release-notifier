@@ -11,10 +11,10 @@ setup(
     version=__version__,
     packages=find_packages(),
     author="Jay MOULIN",
-    author_email="jaymoulin@gmail.com",
+    author_email="jaymoulin+github-release-notifier@gmail.com",
     description="Github Notifier",
     long_description=open('README.rst').read(),
-    install_requires=[""],
+    install_requires=["feedparser", "requests"],
     include_package_data=True,
     url='http://github.com/femtopixel/github-release-notifier/',
     classifiers=[

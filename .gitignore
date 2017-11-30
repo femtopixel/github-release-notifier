@@ -1,4 +1,7 @@
 build
-dist
-__pycache__
 *.egg-info
+qemu-*-static
+dist
+*.yaml
+.Dockerfile
+__pycache__

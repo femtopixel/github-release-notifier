@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys, json, os
-from parser import get_package
+from github_release_notifier.parser import get_package
 from pathlib import Path
 from hashlib import sha224
 
@@ -63,9 +63,11 @@ def get(package, file=__DEFAULT_FILE__):
     except KeyError:
         return []
 
+
 def get_list(file=__DEFAULT_FILE__):
     database = _get_database(file)
     return database.keys()
+
 
 def main():
     print(subscribe(sys.argv[1], sys.argv[2]))
