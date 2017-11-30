@@ -23,13 +23,64 @@ This program will allow you to be notified of Github new releases
 Installation
 ------------
 
-=====
-About
-=====
+.. code::
 
-Requirements
-------------
+    pip3 install github-release-notifier
 
+Usage
+-----
+
+.. code::
+
+    usage: github-release-notifier [-h] [--action {cron,subscribe,unsubscribe}] [--package PACKAGE]
+                  [--webhook WEBHOOK] [--uuid UUID]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      --action {cron,subscribe,unsubscribe}, -a {cron,subscribe,unsubscribe}
+                            Action to do (default: cron)
+      --package PACKAGE, -p PACKAGE
+                            Github package name / url (required for
+                            subscribe/unsubscribe) - prints uuid on subscription
+      --webhook WEBHOOK, -w WEBHOOK
+                            URL to your webhook (required for
+                            subscribe/unsubscribe)
+      --uuid UUID, -u UUID  UUID of your webhook (required for unsubscribe)
+
+Example
+~~~~~~~
+
+First, I register my webhook :
+
+.. code::
+
+    github-release-notifier --action subscribe --webhook https://acme.com/updated --package jaymoulin/google-music-manager
+
+an UUID is printed. this UUID will be required to unsubscribe the webhook.
+
+When `jaymoulin/google-music-manager` releases a new version, `https://acme.com/updated` will be called with HTTP verb `POST` and body, a JSON like this :
+
+.. code::
+
+    {
+        "date": [2017, 11, 13, 19, 46, 35, 0, 317, 0],
+        "version": "0.7.2",
+        "title": "Fixes split modules",
+        "content": "",
+        "media": "https://avatars0.githubusercontent.com/u/14236493?s=60&v=4",
+        "author": "jaymoulin"
+    }
+
+For this to happen, the system should check if a new version have been released.
+We can do that by calling `github-release-notifier` without any parameter or setting `--action` to `cron` (which is default).
+
+To automate this process, we could add this process in a cronjob:
+
+.. code::
+
+    (crontab -l ; echo "0 0 * * * github-release-notifier") | sort - | uniq - | crontab -
+
+This will check every day at midnight if new versions have been released.
 
 Submitting bugs and feature requests
 ------------------------------------
@@ -39,7 +90,7 @@ Bugs and feature request are tracked on GitHub
 Author
 ------
 
-Jay MOULIN jaymoulin+femtopixel@gmail.com See also the list of contributors which participated in this program.
+Jay MOULIN jaymoulin+github-release-notifier@gmail.com See also the list of contributors which participated in this program.
 
 License
 -------
