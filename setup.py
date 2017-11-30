@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 __version__ = '0.1.0'
 
 setup(
-    name='github_notifier',
+    name='github_release_notifier',
     python_requires=">=3",
     version=__version__,
     packages=find_packages(),
@@ -16,7 +16,7 @@ setup(
     long_description=open('README.rst').read(),
     install_requires=[""],
     include_package_data=True,
-    url='http://github.com/femtopixel/github-notifier/',
+    url='http://github.com/femtopixel/github-release-notifier/',
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Programming Language :: Python",
@@ -30,7 +30,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'github-notifier = github_notifier.cli:main',
+            'github-release-notifier = github_release_notifier.cli:main',
         ],
     },
     license="MIT",
