@@ -6,8 +6,14 @@ Github Release Notifier
     :alt: latest release
     :target: http://github.com/femtopixel/github-release-notifier/releases
 .. image:: https://img.shields.io/pypi/v/github-release-notifier.svg
-    :alt: PyPI version
-    :target: https://pypi.org/project/github-release-notifier/
+    :alt: latest release
+    :target: http://github.com/femtopixel/github-release-notifier/releases
+.. image:: https://img.shields.io/docker/pulls/femtopixel/github-release-notifier.svg
+    :alt: Docker pull
+    :target: https://hub.docker.com/r/femtopixel/github-release-notifier/
+.. image:: https://img.shields.io/docker/stars/femtopixel/github-release-notifier.svg
+    :alt: Docker stars
+    :target: https://hub.docker.com/r/femtopixel/github-release-notifier/
 .. image:: https://github.com/jaymoulin/jaymoulin.github.io/raw/master/btc.png
     :alt: Bitcoin donation
     :target: https://m.freewallet.org/id/374ad82e/btc
