@@ -50,6 +50,8 @@ def unsubscribe(uuid, package, callback, file=__DEFAULT_FILE__, salt=__SALT__):
     database = _get_database(file)
     if uuid == get_uuid(package, callback, salt):
         database[package] = list(filter((callback).__ne__, database[package]))
+    else:
+        raise NameError('Wrong uuid for your package')
     _set_database(database, file)
 
 

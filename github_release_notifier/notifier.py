@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys, json, os, requests
+import sys, json, os, requests, logging
 from webhook import get, get_list
 from parser import parse
 from distutils.version import StrictVersion
@@ -11,6 +11,8 @@ __DEFAULT_FILE__ = '~/.github_release_notifier/versions'
 
 
 def run(file=__DEFAULT_FILE__):
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
     updated = {}
     for package in get_list():
         for entry in parse(package):
@@ -20,6 +22,7 @@ def run(file=__DEFAULT_FILE__):
                 _set_database(database, file)
                 updated[package] = entry['version']
                 for webhook in get(package):
+                    logger.info("Hook call : %s / %s" % (webhook, json.dumps(entry)))
                     requests.post(webhook, dict(Body=json.dumps(entry)))
     return updated
 
