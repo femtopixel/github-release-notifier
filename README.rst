@@ -82,6 +82,11 @@ To automate this process, we could add this process in a cronjob:
 
 This will check every day at midnight if new versions have been released.
 
+Docker Usage
+------------
+
+
+
 Submitting bugs and feature requests
 ------------------------------------
 
