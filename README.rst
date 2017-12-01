@@ -7,7 +7,7 @@ Github Release Notifier
     :target: http://github.com/femtopixel/github-release-notifier/releases
 .. image:: https://img.shields.io/pypi/v/github-release-notifier.svg
     :alt: latest release
-    :target: http://github.com/femtopixel/github-release-notifier/releases
+    :target: https://pypi.org/project/github-release-notifier/
 .. image:: https://img.shields.io/docker/pulls/femtopixel/github-release-notifier.svg
     :alt: Docker pull
     :target: https://hub.docker.com/r/femtopixel/github-release-notifier/
