@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import sys, json, os, requests, logging
-from github_release_notifier.webhook import get, get_list
-from github_release_notifier.parser import parse
+from .webhook import get, get_list
+from .parser import parse
 from distutils.version import StrictVersion
 from pathlib import Path
 
@@ -24,7 +24,7 @@ def run(file=__DEFAULT_FILE__):
                 for webhook in get(package):
                     logger.info("Hook call : %s / %s" % (webhook, json.dumps(entry)))
                     try:
-                        requests.post(webhook, dict(Body=json.dumps(entry)))
+                        requests.post(webhook, data=json.dumps(entry), headers={'Content-Type': 'application/json'})
                     except:
                         logger.error("Error occured : %s" % (sys.exc_info()[0]))
                         pass
