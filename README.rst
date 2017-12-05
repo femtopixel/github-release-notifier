@@ -75,6 +75,7 @@ When `jaymoulin/google-music-manager` releases a new version, `https://acme.com/
         "content": "",
         "media": "https://avatars0.githubusercontent.com/u/14236493?s=60&v=4",
         "author": "jaymoulin"
+        "package_name": "jaymoulin/google-music-manager"
     }
 
 For this to happen, the system should check if a new version have been released.

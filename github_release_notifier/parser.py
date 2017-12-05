@@ -7,7 +7,8 @@ __all__ = ['parse', 'get_package']
 
 
 def parse(package):
-    url = 'https://github.com/%s/tags.atom' % get_package(package)
+    package_name = get_package(package)
+    url = 'https://github.com/%s/tags.atom' % package_name
     feed = feedparser.parse(url)
     entries = []
     for item in feed['entries']:
@@ -18,6 +19,7 @@ def parse(package):
             "content": item['content'][0]['value'],
             "version": re.search('(?<=Repository/)[0-9]+/(.+)', item['id']).group(1),
             "media": item['media_thumbnail'][0]['url'],
+            "package_name": package_name,
         })
     return entries
 
