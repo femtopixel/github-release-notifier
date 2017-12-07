@@ -1,4 +1,4 @@
-VERSION ?= 0.1.4
+VERSION ?= 0.1.5
 CACHE ?= --no-cache=1
 FULLVERSION ?= ${VERSION}
 archs = s390x arm32v7 amd64 i386 arm64v8 arm32v6
