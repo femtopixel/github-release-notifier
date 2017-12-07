@@ -11,7 +11,7 @@ __DEFAULT_FILE__ = '/root/.github_release_notifier/versions'
 
 def version_compare(version1, version2):
     def normalize(v):
-        return [int(x) for x in re.sub(r'(\.0+)*$', '', v).split(".")]
+        return [int(x) for x in re.sub(r'([^\.0-9]+)', '', v).split(".")]
 
     return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
 
