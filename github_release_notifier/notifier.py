@@ -1,14 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys, json, os, requests, logging
+import sys, json, os, requests, logging, re
 from .webhook import get, get_list
 from .parser import parse
-from distutils.version import StrictVersion
 from pathlib import Path
 
 __DEFAULT_FILE__ = '/root/.github_release_notifier/versions'
 
+def version_compare(version1, version2):
+    def normalize(v):
+        return [int(x) for x in re.sub(r'(\.0+)*$','', v).split(".")]
+    return cmp(normalize(version1), normalize(version2))
 
 def run(file=__DEFAULT_FILE__):
     logging.basicConfig(level=logging.INFO)
@@ -16,7 +19,7 @@ def run(file=__DEFAULT_FILE__):
     updated = {}
     for package in get_list():
         for entry in parse(package):
-            if StrictVersion(entry['version']) > StrictVersion(get_version(package)):
+            if version_compare(entry['version'], get_version(package)) > 0:
                 database = _get_database(file)
                 database[package] = entry['version']
                 _set_database(database, file)
