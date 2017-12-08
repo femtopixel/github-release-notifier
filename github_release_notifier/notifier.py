@@ -30,7 +30,7 @@ def run(file=__DEFAULT_FILE__):
                 for webhook in get(package):
                     logger.info("Hook call : %s / %s" % (webhook, json.dumps(entry)))
                     try:
-                        requests.post(webhook, data=json.dumps(entry), headers={'Content-Type': 'application/json'})
+                        requests.post(webhook, json=entry)
                     except:
                         logger.error("Error occured : %s" % (sys.exc_info()[0]))
                         pass
