@@ -13,12 +13,12 @@ def parse(package):
     entries = []
     for item in feed['entries']:
         entries.append({
-            "author": item['authors'][0]['name'],
+            "author": item['authors'][0]['name'] if 'authors' in item and item['authors'] and item['authors'][0] and item['authors'][0]['name'] else None,
             "date": item['updated_parsed'],
             "title": item['title_detail']['value'],
-            "content": item['content'][0]['value'],
+            "content": item['content'][0]['value'] if 'content' in item and  item['content'] and item['content'][0] and item['content'][0]['value'] else None,
             "version": re.search('(?<=Repository/)[0-9]+/(.+)', item['id']).group(1),
-            "media": item['media_thumbnail'][0]['url'],
+            "media": item['media_thumbnail'][0]['url'] if 'media_thumbnail' in item and item['media_thumbnail'] and item['media_thumbnail'][0] and item['media_thumbnail'][0]['url'] else None,
             "package_name": package_name,
         })
     return entries
