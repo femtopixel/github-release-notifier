@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys, feedparser, re, datetime, requests
+import sys, feedparser, re, requests
 
 __all__ = ['parse', 'get_package']
 
 
 def parse(package):
     package_name = get_package(package)
-    url = 'https://github.com/%s/tags.atom' % package_name
+    url = 'https://github.com/%s/releases.atom' % package_name
     feed = feedparser.parse(url)
     entries = []
     for item in feed['entries']:
