@@ -15,6 +15,11 @@ def version_compare(version1, version2):
 
     return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
 
+async def _call_webhook(webhook, json, logger):
+    try:
+        requests.post(webhook, json)
+    except:
+        logger.error("Error occured : %s" % (sys.exc_info()[0]))
 
 def run(file=__DEFAULT_FILE__):
     logging.basicConfig(level=logging.INFO)
@@ -29,11 +34,7 @@ def run(file=__DEFAULT_FILE__):
                 updated[package] = entry['version']
                 for webhook in get(package):
                     logger.info("Hook call : %s / %s" % (webhook, json.dumps(entry)))
-                    try:
-                        requests.post(webhook, json=entry)
-                    except:
-                        logger.error("Error occured : %s" % (sys.exc_info()[0]))
-                        pass
+                    _call_webhook(webhook, entry, logger)
     return updated
 
 
