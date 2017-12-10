@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys, json, os, requests, logging, re
+import sys, json, os, requests, logging, re, threading
 from .webhook import get, get_list
 from .parser import parse
 from pathlib import Path
@@ -15,7 +15,7 @@ def version_compare(version1, version2):
 
     return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
 
-async def _call_webhook(webhook, json, logger):
+def _call_webhook(webhook, json, logger):
     try:
         requests.post(webhook, json)
     except:
@@ -34,7 +34,7 @@ def run(file=__DEFAULT_FILE__):
                 updated[package] = entry['version']
                 for webhook in get(package):
                     logger.info("Hook call : %s / %s" % (webhook, json.dumps(entry)))
-                    _call_webhook(webhook, entry, logger)
+                    threading.Thread(target=_call_webhook, args=(webhook, entry, logger,)).start()
     return updated
 
 
