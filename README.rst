@@ -1,3 +1,5 @@
+.. image:: https://github.com/femtopixel/github-release-notifier/raw/master/logo.png
+
 =======================
 Github Release Notifier
 =======================
