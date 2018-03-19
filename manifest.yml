@@ -9,6 +9,11 @@ manifests:
   -
     image: femtopixel/github-release-notifier:$VERSION-arm64v8
     platform:
+      architecture: arm64
+      os: linux
+  -
+    image: femtopixel/github-release-notifier:$VERSION-arm64v8
+    platform:
       architecture: arm
       variant: v8
       os: linux
