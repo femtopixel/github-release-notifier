@@ -1,7 +1,7 @@
 VERSION ?= 0.2.2
 CACHE ?= --no-cache=1
 FULLVERSION ?= ${VERSION}
-archs = s390x arm32v7 amd64 i386 arm64v8 arm32v6
+archs ?= s390x arm32v7 amd64 i386 arm64v8 arm32v6
 
 .PHONY: docker build-docker publish-docker latest
 test: install
