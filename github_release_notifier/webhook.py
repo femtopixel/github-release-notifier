@@ -8,7 +8,7 @@ from hashlib import sha224
 from typing import KeysView
 
 __SALT__ = 'saltedUnique'
-__DEFAULT_FILE__ = '/root/.github_release_notifier/hooks'
+__DEFAULT_FILE__ = str(Path.home()) + '/.github_release_notifier/hooks'
 
 
 def _get_database(file: str = __DEFAULT_FILE__) -> dict:

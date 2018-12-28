@@ -11,7 +11,7 @@ from .webhook import get, get_list
 from .parser import parse
 from pathlib import Path
 
-__DEFAULT_FILE__ = '/root/.github_release_notifier/versions'
+__DEFAULT_FILE__ = str(Path.home()) + '/.github_release_notifier/versions'
 
 
 def version_compare(version1: str, version2: str) -> int:

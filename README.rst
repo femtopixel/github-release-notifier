@@ -66,7 +66,7 @@ First, I register my webhook :
 
 an UUID is printed. this UUID will be required to unsubscribe the webhook.
 
-When `jaymoulin/google-music-manager` releases a new version, `https://example.com/updated` will be called with HTTP verb `POST` and body, a JSON like this :
+When `jaymoulin/google-music-manager` releases a new version, `https://example.com/updated` will be called with HTTP method `POST` and body, a JSON like this :
 
 .. code::
 
