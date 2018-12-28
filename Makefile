@@ -4,14 +4,14 @@ FULLVERSION ?= ${VERSION}
 archs ?= s390x arm32v7 amd64 i386 arm64v8 arm32v6
 
 .PHONY: docker build-docker publish-docker latest
-test: install
+test: install check
 	twine upload -r testpypi dist/*
-publish: install
+publish: install check
 	twine upload dist/*
-install: clean check
+install: clean
 	sudo python3 setup.py sdist
 check:
-	python3 setup.py check --restructuredtext
+	twine check dist/*
 build:
 	mkdir -p build
 dist:
