@@ -62,11 +62,11 @@ First, I register my webhook :
 
 .. code::
 
-    github-release-notifier --action subscribe --webhook https://acme.com/updated --package jaymoulin/google-music-manager
+    github-release-notifier --action subscribe --webhook https://example.com/updated --package jaymoulin/google-music-manager
 
 an UUID is printed. this UUID will be required to unsubscribe the webhook.
 
-When `jaymoulin/google-music-manager` releases a new version, `https://acme.com/updated` will be called with HTTP verb `POST` and body, a JSON like this :
+When `jaymoulin/google-music-manager` releases a new version, `https://example.com/updated` will be called with HTTP verb `POST` and body, a JSON like this :
 
 .. code::
 
@@ -112,7 +112,7 @@ Then register your webhook :
 
 .. code::
 
-    docker exec GRN -a subscribe -p jaymoulin/google-music-manager -w https://acme.com/updated
+    docker exec GRN -a subscribe -p jaymoulin/google-music-manager -w https://example.com/updated
 
 
 Submitting bugs and feature requests

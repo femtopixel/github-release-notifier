@@ -1,7 +1,12 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
-import sys, json, os, requests, logging, re, threading
+import sys
+import json
+import os
+import requests
+import logging
+import re
+import threading
 from .webhook import get, get_list
 from .parser import parse
 from pathlib import Path
@@ -9,20 +14,22 @@ from pathlib import Path
 __DEFAULT_FILE__ = '/root/.github_release_notifier/versions'
 
 
-def version_compare(version1, version2):
+def version_compare(version1: str, version2: str) -> int:
     def normalize(v):
-        return [int(x) for x in re.sub(r'([^\.0-9]+)', '', v).split(".")]
+        return [int(x) for x in re.sub(r'([^.0-9]+)', '', v).split(".")]
 
     return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
 
-def _call_webhook(webhook, entry, logger):
+
+def _call_webhook(webhook: str, entry: str, logger: logging.Logger) -> None:
     logger.info("Hook call : %s / %s" % (webhook, json.dumps(entry)))
     try:
         requests.post(webhook, json=entry)
-    except:
+    except requests.exceptions.RequestException:
         logger.error("Error occured : %s" % (sys.exc_info()[0]))
 
-def run(file=__DEFAULT_FILE__):
+
+def run(file: str = __DEFAULT_FILE__) -> dict:
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
     updated = {}
@@ -38,14 +45,13 @@ def run(file=__DEFAULT_FILE__):
     return updated
 
 
-def _get_database(file=__DEFAULT_FILE__):
-    database = {}
-    if Path(file).is_file():
-        database = json.loads(open(file, "r").read())
-    return database
+def _get_database(file: str = __DEFAULT_FILE__) -> dict:
+    if not Path(file).is_file():
+        raise ValueError('Unexpected database file provided')
+    return json.loads(open(file, "r").read())
 
 
-def _set_database(database, filepath=__DEFAULT_FILE__):
+def _set_database(database: dict, filepath: str = __DEFAULT_FILE__) -> None:
     dirname = os.path.dirname(filepath)
     if not os.path.exists(dirname):
         os.makedirs(dirname)
@@ -54,17 +60,6 @@ def _set_database(database, filepath=__DEFAULT_FILE__):
     file.close()
 
 
-def get_version(package, file=__DEFAULT_FILE__):
+def get_version(package: str, file: str = __DEFAULT_FILE__) -> str:
     database = _get_database(file)
-    try:
-        return database[package]
-    except KeyError:
-        return '0.0.0'
-
-
-def main():
-    print(run())
-
-
-if __name__ == "__main__":
-    main()
+    return database.get(package, '0.0.0')

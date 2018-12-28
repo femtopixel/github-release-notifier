@@ -1,41 +1,44 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
-import sys, feedparser, re, requests
+import feedparser
+import re
+import requests
+from typing import List
 
-__all__ = ['parse', 'get_package']
 
-
-def parse(package):
+def parse(package: str) -> List[dict]:
     package_name = get_package(package)
     url = 'https://github.com/%s/releases.atom' % package_name
     feed = feedparser.parse(url)
     entries = []
     for item in feed['entries']:
-        entries.append({
-            "author": item['authors'][0]['name'] if 'authors' in item and item['authors'] and item['authors'][0] and item['authors'][0]['name'] else None,
+        current_dict = {
+            'author': None,
+            "content": None,
+            "media": None,
             "date": item['updated_parsed'],
             "title": item['title_detail']['value'],
-            "content": item['content'][0]['value'] if 'content' in item and  item['content'] and item['content'][0] and item['content'][0]['value'] else None,
             "version": re.search('(?<=Repository/)[0-9]+/(.+)', item['id']).group(1),
-            "media": item['media_thumbnail'][0]['url'] if 'media_thumbnail' in item and item['media_thumbnail'] and item['media_thumbnail'][0] and item['media_thumbnail'][0]['url'] else None,
             "package_name": package_name,
-        })
+        }
+        if 'authors' in item and item['authors'].get(0) is not None and 'name' in item['authors'][0]:
+            current_dict['author'] = item['authors'][0]['name']
+        if 'content' in item and item['content'].get(0) is not None and 'value' in item['content'][0]:
+            current_dict['content'] = item['content'][0]['value']
+        if (
+                'media_thumbnail' in item and
+                item['media_thumbnail'].get(0) is not None
+                and 'url' in item['media_thumbnail'][0]
+        ):
+            current_dict['media'] = item['media_thumbnail'][0]['url']
+        entries.append(current_dict)
     return entries
 
 
-def get_package(entry):
+def get_package(entry: str) -> str:
     if 'github' in entry:
         entry = re.search('(?<=github.com/)[^/]+/[^/]+', entry).group(0)
     request = requests.get('https://github.com/%s/tags.atom' % entry)
     if request.status_code != 200:
         raise NameError('%s is not a valid github url/package' % entry)
     return entry
-
-
-def main():
-    print(parse(sys.argv[1]))
-
-
-if __name__ == "__main__":
-    main()

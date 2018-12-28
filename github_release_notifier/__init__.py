@@ -1,6 +1,6 @@
 """
 This program will allow you to be notified of Github new releases
 """
-from .parser import *
-from .webhook import *
-from .notifier import *
+
+__all__ = ['parser', 'webhook', 'notifier']
+__version__ = '0.2.3'
