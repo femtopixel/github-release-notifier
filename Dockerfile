@@ -6,7 +6,7 @@ FROM builder
 
 LABEL maintainer="Jay MOULIN <jaymoulin@gmail.com> <https://twitter.com/MoulinJay>"
 
-RUN pip install github-release-notifier
+RUN pip install -U pip && pip install github-release-notifier
 COPY ./entrypoint.sh /bin/entrypoint
 COPY ./mycron.sh /bin/mycron
 ENTRYPOINT ["/bin/entrypoint"]
