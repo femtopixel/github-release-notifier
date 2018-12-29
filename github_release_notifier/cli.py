@@ -2,7 +2,7 @@
 # coding: utf-8
 
 import argparse
-import github_release_notifier
+from github_release_notifier import notifier, webhook
 
 
 def main():
@@ -31,11 +31,11 @@ def main():
     )
     args = parser.parse_args()
     if args.action == 'cron':
-        print(github_release_notifier.notifier.run())
+        print(notifier.run())
     if args.action == 'subscribe':
-        print(github_release_notifier.webhook.subscribe(args.package, args.webhook))
+        print(webhook.subscribe(args.package, args.webhook))
     if args.action == 'unsubscribe':
-        github_release_notifier.webhook.unsubscribe(args.uuid, args.package, args.webhook)
+        webhook.unsubscribe(args.uuid, args.package, args.webhook)
 
 
 if __name__ == "__main__":
