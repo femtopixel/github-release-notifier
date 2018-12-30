@@ -21,13 +21,13 @@ def parse(package: str) -> List[dict]:
             "version": re.search('(?<=Repository/)[0-9]+/(.+)', item['id']).group(1),
             "package_name": package_name,
         }
-        if 'authors' in item and item['authors'].get(0) is not None and 'name' in item['authors'][0]:
+        if 'authors' in item and item['authors'][0] is not None and 'name' in item['authors'][0]:
             current_dict['author'] = item['authors'][0]['name']
-        if 'content' in item and item['content'].get(0) is not None and 'value' in item['content'][0]:
+        if 'content' in item and item['content'][0] is not None and 'value' in item['content'][0]:
             current_dict['content'] = item['content'][0]['value']
         if (
                 'media_thumbnail' in item and
-                item['media_thumbnail'].get(0) is not None
+                item['media_thumbnail'][0] is not None
                 and 'url' in item['media_thumbnail'][0]
         ):
             current_dict['media'] = item['media_thumbnail'][0]['url']

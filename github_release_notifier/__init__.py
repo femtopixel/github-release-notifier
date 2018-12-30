@@ -3,4 +3,4 @@ This program will allow you to be notified of Github new releases
 """
 
 __all__ = ['parser', 'webhook', 'notifier']
-__version__ = '0.3.1'
+__version__ = '0.3.2'
