@@ -34,14 +34,20 @@ def run(file: str = __DEFAULT_FILE__) -> dict:
     logger = logging.getLogger(__name__)
     updated = {}
     for package in get_list():
-        for entry in parse(package):
-            if version_compare(entry['version'], get_version(package)) > 0:
-                database = _get_database(file)
-                database[package] = entry['version']
-                _set_database(database, file)
-                updated[package] = entry['version']
-                for webhook in get(package):
-                    threading.Thread(target=_call_webhook, args=(webhook, entry, logger,)).start()
+        try:
+            for entry in parse(package):
+                if version_compare(entry['version'], get_version(package)) > 0:
+                    database = _get_database(file)
+                    database[package] = entry['version']
+                    _set_database(database, file)
+                    updated[package] = entry['version']
+                    for webhook in get(package):
+                        threading.Thread(target=_call_webhook, args=(webhook, entry, logger,)).start()
+        except NameError as e:
+            logger.error("Package removed : %s" % package)
+            database = _get_database(file)
+            del database[package]
+            _set_database(database, file)
     return updated
 
 
