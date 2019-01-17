@@ -21,7 +21,7 @@ clean: build dist
 	sudo rm -Rf dist/*
 docker: build-docker publish-docker latest
 build-docker:
-	cp /usr/bin/qemu-*-static .
+	cp -r /usr/bin/qemu-*-static .
 	$(foreach arch,$(archs), \
 		cat Dockerfile | sed "s/FROM python:alpine/FROM ${arch}\/python:alpine/g" > .Dockerfile; \
 		docker build -t femtopixel/github-release-notifier:${VERSION}-$(arch) --build-arg VERSION=${VERSION} -f .Dockerfile ${CACHE} .;\
