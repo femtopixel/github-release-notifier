@@ -25,6 +25,10 @@ Github Release Notifier
 .. image:: https://github.com/jaymoulin/jaymoulin.github.io/raw/master/ppl.png
     :alt: PayPal donation
     :target: https://www.paypal.me/jaymoulin
+.. image:: https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png
+    :alt: Buy me a coffee
+    :target: https://www.buymeacoffee.com/3Yu8ajd7W
+
 
 This program will allow you to be notified of Github new releases
 
