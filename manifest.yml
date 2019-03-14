@@ -27,8 +27,3 @@ manifests:
     platform:
       architecture: 386
       os: linux
-  -
-    image: femtopixel/github-release-notifier:$VERSION-s390x
-    platform:
-      architecture: s390x
-      os: linux
