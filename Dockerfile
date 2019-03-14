@@ -1,14 +1,21 @@
-FROM python:alpine3.6 as builder
+FROM python:alpine as builder
 
 COPY qemu-*-static /usr/bin/
 
 FROM builder
 
-ARG VERSION=0.3.2
+ARG VERSION=0.4.0
 LABEL maintainer="Jay MOULIN <jaymoulin@gmail.com> <https://twitter.com/MoulinJay>"
 LABEL version=${VERSION}
 
-RUN pip install -U pip && pip install github-release-notifier
+COPY . /app
+WORKDIR /app
+
+RUN pip install -U pip && \
+    pip install -e . && \
+    mkdir -p ${HOME}/.github_release_notifier && \
+    touch ${HOME}/.github_release_notifier/versions
+
 COPY ./entrypoint.sh /bin/entrypoint
 COPY ./mycron.sh /bin/mycron
 ENTRYPOINT ["/bin/entrypoint"]

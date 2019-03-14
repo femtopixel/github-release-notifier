@@ -11,7 +11,7 @@ from .webhook import get, get_list
 from .parser import parse
 from pathlib import Path
 
-__DEFAULT_FILE__ = str(Path.home()) + '/.github_release_notifier/versions'
+__DEFAULT_FILE__ = os.getenv('GRN_VERSIONS_FILE', str(Path.home()) + '/.github_release_notifier/versions')
 
 
 def version_compare(version1: str, version2: str) -> int:
@@ -26,7 +26,7 @@ def _call_webhook(webhook: str, entry: str, logger: logging.Logger) -> None:
     try:
         requests.post(webhook, json=entry)
     except requests.exceptions.RequestException:
-        logger.error("Error occured : %s" % (sys.exc_info()[0]))
+        logger.error("Error occurred : %s" % (sys.exc_info()[0]))
 
 
 def run(file: str = __DEFAULT_FILE__) -> dict:
