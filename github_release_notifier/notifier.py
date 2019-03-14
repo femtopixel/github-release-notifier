@@ -5,20 +5,13 @@ import json
 import os
 import requests
 import logging
-import re
 import threading
 from .webhook import get, get_list
 from .parser import parse
 from pathlib import Path
+from distutils.version import LooseVersion
 
 __DEFAULT_FILE__ = os.getenv('GRN_VERSIONS_FILE', str(Path.home()) + '/.github_release_notifier/versions')
-
-
-def version_compare(version1: str, version2: str) -> int:
-    def normalize(v):
-        return [int(x) for x in re.sub(r'([^.0-9]+)', '', v).split(".")]
-
-    return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
 
 
 def _call_webhook(webhook: str, entry: str, logger: logging.Logger) -> None:
@@ -36,7 +29,7 @@ def run(file: str = __DEFAULT_FILE__) -> dict:
     for package in get_list():
         try:
             for entry in parse(package):
-                if version_compare(entry['version'], get_version(package)) > 0:
+                if LooseVersion(entry['version']) > LooseVersion(get_version(package)):
                     database = _get_database(file)
                     database[package] = entry['version']
                     _set_database(database, file)
