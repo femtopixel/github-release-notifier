@@ -95,6 +95,16 @@ To automate this process, we could add this process in a cronjob:
 
 This will check every day at midnight if new versions have been released.
 
+Configuration
+-------------
+
+Environment variables can be defined to change default `hooks` or `versions` database files (plain json file)
+
+.. code::
+
+    GRN_VERSIONS_FILE: Path to saved versions (default: ${HOME}/.github_release_notifier/versions)
+    GRN_HOOKS_FILE: Path to hooks configuration (default: ${HOME}/.github_release_notifier/hooks)
+
 Docker Usage
 ------------
 

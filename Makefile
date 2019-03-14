@@ -1,4 +1,4 @@
-VERSION ?= 0.3.3
+VERSION ?= 0.4.0
 CACHE ?= --no-cache=1
 FULLVERSION ?= ${VERSION}
 archs ?= s390x arm32v7 amd64 i386 arm64v8 arm32v6
@@ -24,7 +24,7 @@ build-docker:
 	cp -r /usr/bin/qemu-*-static .
 	$(foreach arch,$(archs), \
 		cat Dockerfile | sed "s/FROM python:alpine/FROM ${arch}\/python:alpine/g" > .Dockerfile; \
-		docker build -t femtopixel/github-release-notifier:${VERSION}-$(arch) --build-arg VERSION=${VERSION} -f .Dockerfile ${CACHE} .;\
+		docker build -t femtopixel/github-release-notifier:${VERSION}-$(arch) --build-arg VERSION=${VERSION}-$(arch) -f .Dockerfile ${CACHE} .;\
 	)
 publish-docker:
 	docker push femtopixel/github-release-notifier
