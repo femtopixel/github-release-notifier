@@ -29,7 +29,13 @@ def run(file: str = __DEFAULT_FILE__) -> dict:
     for package in get_list():
         try:
             for entry in parse(package):
-                if LooseVersion(entry['version']) > LooseVersion(get_version(package)):
+                try:
+                    condition = LooseVersion(str(entry['version'])) > LooseVersion(str(get_version(package)))
+                except TypeError as e:
+                    # https://bugs.python.org/issue14894
+                    # Always consider the version is new in case of buggy comparision
+                    condition = True
+                if condition:
                     database = _get_database(file)
                     database[package] = entry['version']
                     _set_database(database, file)
