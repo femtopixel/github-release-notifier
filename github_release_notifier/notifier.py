@@ -14,6 +14,13 @@ from distutils.version import LooseVersion
 __DEFAULT_FILE__ = os.getenv('GRN_VERSIONS_FILE', str(Path.home()) + '/.github_release_notifier/versions')
 
 
+def version_compare(version1: str, version2: str) -> int:
+    def normalize(v):
+        return [int(x) for x in re.sub(r'([^.0-9]+)', '', v).split(".")]
+
+    return (normalize(version1) > normalize(version2)) - (normalize(version1) < normalize(version2))
+
+
 def _call_webhook(webhook: str, entry: str, logger: logging.Logger) -> None:
     logger.info("Hook call : %s / %s" % (webhook, json.dumps(entry)))
     try:
@@ -32,9 +39,7 @@ def run(file: str = __DEFAULT_FILE__) -> dict:
                 try:
                     condition = LooseVersion(str(entry['version'])) > LooseVersion(str(get_version(package)))
                 except TypeError as e:
-                    # https://bugs.python.org/issue14894
-                    # Always consider the version is new in case of buggy comparision
-                    condition = True
+                    condition = version_compare(str(entry['version']), str(get_version(package))) > 0
                 if condition:
                     database = _get_database(file)
                     database[package] = entry['version']
