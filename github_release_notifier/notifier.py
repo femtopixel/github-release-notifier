@@ -37,9 +37,9 @@ def run(file: str = __DEFAULT_FILE__) -> dict:
         try:
             for entry in parse(package):
                 try:
-                    condition = LooseVersion(str(entry['version'])) > LooseVersion(str(get_version(package)))
-                except TypeError as e:
                     condition = version_compare(str(entry['version']), str(get_version(package))) > 0
+                except ValueError as e:
+                    condition = LooseVersion(str(entry['version'])) > LooseVersion(str(get_version(package)))
                 if condition:
                     database = _get_database(file)
                     database[package] = entry['version']
