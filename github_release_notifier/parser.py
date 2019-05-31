@@ -26,9 +26,9 @@ def parse(package: str) -> List[dict]:
         if 'content' in item and item['content'][0] is not None and 'value' in item['content'][0]:
             current_dict['content'] = item['content'][0]['value']
         if (
-                'media_thumbnail' in item and
-                item['media_thumbnail'][0] is not None
-                and 'url' in item['media_thumbnail'][0]
+            'media_thumbnail' in item and
+            item['media_thumbnail'][0] is not None
+            and 'url' in item['media_thumbnail'][0]
         ):
             current_dict['media'] = item['media_thumbnail'][0]['url']
         entries.append(current_dict)
