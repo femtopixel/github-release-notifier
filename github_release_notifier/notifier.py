@@ -6,6 +6,7 @@ import os
 import requests
 import logging
 import threading
+import re
 from .webhook import get, get_list
 from .parser import parse
 from pathlib import Path
@@ -38,10 +39,10 @@ def run(file: str = __DEFAULT_FILE__) -> dict:
             for entry in parse(package):
                 try:
                     condition = version_compare(str(entry['version']), str(get_version(package))) > 0
-                except e:
+                except TypeError:
                     try:
                         condition = LooseVersion(str(entry['version'])) > LooseVersion(str(get_version(package)))
-                    except e:
+                    except (AttributeError, TypeError):
                         condition = False
                 if condition:
                     database = _get_database(file)
