@@ -22,6 +22,9 @@ Github Release Notifier
 .. image:: https://github.com/jaymoulin/jaymoulin.github.io/raw/master/ltc.png
     :alt: Litecoin donation
     :target: https://m.freewallet.org/id/374ad82e/ltc
+.. image:: https://github.com/jaymoulin/jaymoulin.github.io/raw/master/utip.png
+    :alt: Watch Ads
+    :target: https://utip.io/femtopixel
 .. image:: https://github.com/jaymoulin/jaymoulin.github.io/raw/master/ppl.png
     :alt: PayPal donation
     :target: https://www.paypal.me/jaymoulin
