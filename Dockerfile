@@ -5,7 +5,7 @@ COPY qemu-*-static /usr/bin/
 FROM builder
 
 ARG VERSION=0.4.1
-LABEL maintainer="Jay MOULIN <jaymoulin@gmail.com> <https://twitter.com/MoulinJay>"
+LABEL maintainer="Jay MOULIN <https://femtopixel.com/femtopixel/github-release-notifier> <https://twitter.com/MoulinJay>"
 LABEL version=${VERSION}
 
 COPY . /app
