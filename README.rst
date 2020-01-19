@@ -16,12 +16,6 @@ Github Release Notifier
 .. image:: https://img.shields.io/docker/stars/femtopixel/github-release-notifier.svg
     :alt: Docker stars
     :target: https://hub.docker.com/r/femtopixel/github-release-notifier/
-.. image:: https://github.com/jaymoulin/jaymoulin.github.io/raw/master/btc.png
-    :alt: Bitcoin donation
-    :target: https://m.freewallet.org/id/374ad82e/btc
-.. image:: https://github.com/jaymoulin/jaymoulin.github.io/raw/master/ltc.png
-    :alt: Litecoin donation
-    :target: https://m.freewallet.org/id/374ad82e/ltc
 .. image:: https://github.com/jaymoulin/jaymoulin.github.io/raw/master/utip.png
     :alt: Watch Ads
     :target: https://utip.io/femtopixel
