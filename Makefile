@@ -27,7 +27,7 @@ build-docker:
 		docker build -t femtopixel/github-release-notifier:${VERSION}-$(arch) --build-arg VERSION=${VERSION}-$(arch) -f .Dockerfile ${CACHE} .;\
 	)
 publish-docker:
-	docker push femtopixel/github-release-notifier
+	docker push femtopixel/github-release-notifier -a
 	cat manifest.yml | sed "s/\$$VERSION/${VERSION}/g" > manifest.yaml
 	cat manifest.yaml | sed "s/\$$FULLVERSION/${FULLVERSION}/g" > manifest2.yaml
 	mv manifest2.yaml manifest.yaml
