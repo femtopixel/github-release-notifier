@@ -22,11 +22,11 @@ Github Release Notifier
 .. image:: https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png
     :alt: Buy me a coffee
     :target: https://www.buymeacoffee.com/jaymoulin
-.. image:: https://badgen.net/badge/become/a%20patron/F96854
-    :alt: Become a Patron
-    :target: https://patreon.com/jaymoulin
+.. image:: https://storage.ko-fi.com/cdn/kofi2.png
+    :alt: Buy me a coffee
+    :target: https://ko-fi.com/jaymoulin
 
-DISCLAIMER: As-of 2021, this product does not have a free support team anymore. If you want this product to be maintained, please support on Patreon.
+DISCLAIMER: As-of 2021, this product does not have a free support team anymore. If you want this product to be maintained, please support.
 
 (This product is available under a free and permissive license, but needs financial support to sustain its continued improvements. In addition to maintenance and stability there are many desirable features yet to be added.)This program will allow you to be notified of Github new releases
 
