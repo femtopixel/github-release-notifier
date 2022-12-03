@@ -22,7 +22,7 @@ Github Release Notifier
 .. image:: https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png
     :alt: Buy me a coffee
     :target: https://www.buymeacoffee.com/jaymoulin
-.. image:: https://storage.ko-fi.com/cdn/kofi2.png
+.. image:: https://ko-fi.com/img/githubbutton_sm.svg
     :alt: Buy me a coffee
     :target: https://ko-fi.com/jaymoulin
 
