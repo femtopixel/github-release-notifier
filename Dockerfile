@@ -1,18 +1,14 @@
-FROM python:alpine as builder
-
-COPY qemu-*-static /usr/bin/
-
-FROM builder
+FROM python:alpine
 
 ARG VERSION=0.4.1
-LABEL maintainer="Jay MOULIN <https://jaymoulin.me/femtopixel/github-release-notifier> <https://twitter.com/MoulinJay>"
-LABEL version=${VERSION}
+ARG TARGETPLATFORM
+LABEL maintainer="Jay MOULIN <https://jaymoulin.me/femtopixel/github-release-notifier>"
+LABEL version=${VERSION}-${TARGETPLATFORM}
 
 COPY . /app
 WORKDIR /app
 
-RUN pip install -U pip && \
-    pip install -e . && \
+RUN pip install -e . && \
     mkdir -p ${HOME}/.github_release_notifier && \
     touch ${HOME}/.github_release_notifier/versions
 
